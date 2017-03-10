@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 data = np.genfromtxt('data.txt',delimiter='\t',dtype='str')
 movies = np.genfromtxt('movies.txt',delimiter='\t',dtype='str')
-
+path = './Visualizations/'
 allMovies = {}
 
 movieIDs = data[:,1]
@@ -24,39 +24,12 @@ genreID = {'unknown': 2, 'action': 3, 'adventure': 4, 'animation': 5, \
 	'musical': 14, 'mystery': 15, 'romance': 16, 'sci-fi': 17, 'thriller': 18,\
 	'war': 19, 'western': 20}
 
-# I got help with the creating a boxplot from this site: 
-# http://blog.bharatbhole.com/creating-boxplots-with-matplotlib/
 def buildBoxPlot(data_to_plot, xlabels, title, filename):
 
 	fig = plt.figure(1, figsize=(9,6))
 	ax = fig.add_subplot(111)
 
-	## add patch_artist=True option to ax.boxplot() 
-	## to get fill color
-	bp = ax.boxplot(data_to_plot, patch_artist=True)
-
-	## change outline color, fill color and linewidth of the boxes
-	for box in bp['boxes']:
-	    # change outline color
-	    box.set( color='#7570b3', linewidth=2)
-	    # change fill color
-	    box.set( facecolor = '#1b9e77' )
-
-	## change color and linewidth of the whiskers
-	for whisker in bp['whiskers']:
-	    whisker.set(color='#7570b3', linewidth=2)
-
-	## change color and linewidth of the caps
-	for cap in bp['caps']:
-	    cap.set(color='#7570b3', linewidth=2)
-
-	## change color and linewidth of the medians
-	for median in bp['medians']:
-	    median.set(color='#b2df8a', linewidth=2)
-
-	## change the style of fliers and their fill
-	for flier in bp['fliers']:
-	    flier.set(marker='o', color='#e7298a', alpha=0.5)
+	bp = ax.boxplot(data_to_plot, showmeans=True)
 
 	# Customize the x-axis labels
 	ax.set_xticklabels(xlabels)
@@ -71,6 +44,7 @@ def buildBoxPlot(data_to_plot, xlabels, title, filename):
 	fig.suptitle(title)
 
 	fig.savefig(filename, bbox_inches='tight')
+	fig.clf()
 
 def visualizeAllRatings():
 	allRatings = []
@@ -81,7 +55,8 @@ def visualizeAllRatings():
 	plt.ylabel('Number of Movies')
 	plt.title('Histogram of the Number of Ratings in the Dataset')
 	plt.hist(allRatings, bins=5)
-	plt.savefig('AllRatings.png')
+	plt.savefig(path+'AllRatings.png')
+	plt.close()
 
 def visualizeMostPopular(n):
 	sortedDict = sorted(allMovies, key=lambda k: len(allMovies[k]), reverse=True)
@@ -95,7 +70,7 @@ def visualizeMostPopular(n):
 		movieNames.append(movies[(index-1),1])
 
 	title = 'Most Popular Movies and their Ratings'
-	filename = 'popularMovies.png'
+	filename = path+'popularMovies.png'
 	buildBoxPlot(data_to_plot, movieNames, title, filename)
 
 def visualizeHighestRated(n):
@@ -118,7 +93,7 @@ def visualizeHighestRated(n):
 		movieNames.append(movies[(index-1),1])
 
 	title = 'The Ratings of the Highest Rated Movies'
-	filename = 'highestRated.png'
+	filename = path+'highestRated.png'
 	buildBoxPlot(data_to_plot, movieNames, title, filename)
 
 def visualizeGenre(genre):
@@ -127,7 +102,6 @@ def visualizeGenre(genre):
 	allRatings = []
 	for i in range(len(allMovies)):
 		if(int(movies[i, genreNum])):
-			print(movies[i, 1])
 			allRatings.extend(allMovies[i+1])
 
 	plt.xlabel('Rating')
@@ -136,14 +110,14 @@ def visualizeGenre(genre):
 	filename = genre+'Ratings.png'
 	plt.title(title)
 	plt.hist(allRatings, bins=5)
-	plt.savefig(filename)
+	plt.savefig(path+filename)
+	plt.close()
 
-# visualizeAllRatings()
-# visualizeMostPopular(10)
-# visualizeHighestRated(10)
-# visualizeGenre('childrens')
-# visualizeGenre('musical')
-# visualizeGenre('horror')
-# visualizeGenre('romance')
+visualizeAllRatings()
+visualizeMostPopular(10)
+visualizeHighestRated(10)
+visualizeGenre('musical')
+visualizeGenre('horror')
+visualizeGenre('romance')
 
 
