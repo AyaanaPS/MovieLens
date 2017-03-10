@@ -121,21 +121,27 @@ def visualizeHighestRated(n):
 	filename = 'highestRatings.png'
 	buildBoxPlot(data_to_plot, movieNames, title, filename)
 
-# def visualizeGenre(genre):
-# 	genreNum = genreID[genre]
-# 	print(genreNum)
-# 	allRatings = []
-# 	for i in range(len(allMovies)):
-# 		if(int(movies[i, genreNum])):
-# 			print(movies[i, 1])
-# 			allRatings.extend(allMovies[i+1])
+def visualizeGenre(genre):
+	genreNum = genreID[genre]
+	# print(genreNum)
+	allRatings = []
+	for i in range(len(allMovies)):
+		if(int(movies[i, genreNum])):
+			print(movies[i, 1])
+			allRatings.extend(allMovies[i+1])
 
-	
-
+	plt.xlabel('Rating')
+	plt.ylabel('Number of Movies')
+	title = 'Histogram of the Number of Ratings for a ' + genre.capitalize() + ' Movie'
+	filename = genre+'Ratings.png'
+	plt.title(title)
+	plt.hist(allRatings, bins=5)
+	plt.savefig(filename)
 
 # visualizeAllRatings()
 # visualizeMostPopular(10)
 # visualizeHighestRated(10)
+visualizeGenre('childrens')
 # visualizeGenre('musical')
 
 
