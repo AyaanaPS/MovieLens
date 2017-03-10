@@ -124,28 +124,34 @@ def visualizeHighestRated(n):
 		movieNames.append(movies[(index-1),1])
 
 	title = 'The Ratings of the Highest Rated Movies'
-	filename = 'highestRatings.png'
+	filename = 'highestRated.png'
 	buildBoxPlot(data_to_plot, movieNames, title, filename)
 
+def visualizeGenre(genre):
+	genreNum = genreID[genre]
+	# print(genreNum)
+	allRatings = []
+	for i in range(len(allMovies)):
+		if(int(movies[i, genreNum])):
+			print(movies[i, 1])
+			allRatings.extend(allMovies[i+1])
 
-
-
-# def visualizeGenre(genre):
-# 	genreNum = genreID[genre]
-# 	print(genreNum)
-# 	allRatings = []
-# 	for i in range(len(allMovies)):
-# 		if(int(movies[i, genreNum])):
-# 			print(movies[i, 1])
-# 			allRatings.extend(allMovies[i+1])
-
-	
-
+	plt.xlabel('Rating')
+	plt.ylabel('Number of Movies')
+	title = 'Histogram of the Number of Ratings for a ' + genre.capitalize() + ' Movie'
+	filename = genre+'Ratings.png'
+	plt.title(title)
+	plt.hist(allRatings, bins=5)
+	plt.savefig(filename)
 
 # visualizeAllRatings()
 # visualizeMostPopular(10)
 # visualizeHighestRated(10)
+# visualizeGenre('childrens')
 # visualizeGenre('musical')
+# visualizeGenre('horror')
+# visualizeGenre('romance')
+
 
 def scatterMostPopular(n):
 	sortedDict = sorted(allMovies, key=lambda k: len(allMovies[k]), reverse=True)
@@ -210,7 +216,35 @@ def scatterHighestRated(n):
 		plt.annotate(name,xy=(x, y),xytext=(-20, 20),textcoords='offset points',ha='right',va='bottom',arrowprops=dict(arrowstyle = '->',connectionstyle='arc3,rad=0'))
 	plt.show()
 
+def scatterGenres(n,genre):
+	genreNum = genreID[genre]
+	genreMovies = []
+
+	x_vals = []
+	y_vals = []
+	movieNames = []
+
+	for i in range(len(allMovies)):
+		if(int(movies[i, genreNum])):
+			genreMovies.append(i)
+
+	shuffle(genreMovies)
+	for i in range(n):
+		index = genreMovies[i]
+		x, y = movie_coords[index] 
+		x_vals.append(x)
+		y_vals.append(y)
+		movieNames.append(movies[(index),1])
+
+	plt.scatter(x_vals, y_vals)
+	for name, x, y in zip(movieNames, x_vals, y_vals):
+		plt.annotate(name,xy=(x, y),xytext=(-20, 20),textcoords='offset points',ha='right',va='bottom',arrowprops=dict(arrowstyle = '->',connectionstyle='arc3,rad=0'))
+	plt.show()
+
 
 scatterMostPopular(10)
 scatterRandom(10)
 scatterHighestRated(10)
+scatterGenres(10, 'musical')
+scatterGenres(10, 'horror')
+scatterGenres(10, 'romance')
