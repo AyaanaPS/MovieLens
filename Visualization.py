@@ -170,8 +170,8 @@ def scatterMostPopular(n):
 		plt.annotate(name,xy=(x, y),xytext=(-20, 20),textcoords='offset points',ha='right',va='bottom',arrowprops=dict(arrowstyle = '->',connectionstyle='arc3,rad=0'))
 	plt.title('2-D Visualization of 10 Most Popular Movies')
 	axes = plt.gca()
-	axes.set_xlim([-1,1])
-	axes.set_ylim([-1,1])
+	axes.set_xlim([-2,2])
+	axes.set_ylim([-2,2])
 	plt.show()
 
 def scatterRandom(n):
@@ -192,8 +192,8 @@ def scatterRandom(n):
 		plt.annotate(name,xy=(x, y),xytext=(-20, 20),textcoords='offset points',ha='right',va='bottom',arrowprops=dict(arrowstyle = '->',connectionstyle='arc3,rad=0'))
 	plt.title('2-D Visualization of 10 Random Movies')
 	axes = plt.gca()
-	axes.set_xlim([-1,1])
-	axes.set_ylim([-1,1])
+	axes.set_xlim([-2,2])
+	axes.set_ylim([-2,2])
 	plt.show()
 
 def scatterHighestRated(n):
@@ -224,8 +224,8 @@ def scatterHighestRated(n):
 		plt.annotate(name,xy=(x, y),xytext=(-20, 20),textcoords='offset points',ha='right',va='bottom',arrowprops=dict(arrowstyle = '->',connectionstyle='arc3,rad=0'))
 	plt.title('2-D Visualization of 10 Highest Rated Movies')
 	axes = plt.gca()
-	axes.set_xlim([-1,1])
-	axes.set_ylim([-1,1])
+	axes.set_xlim([-2,2])
+	axes.set_ylim([-2,2])
 	plt.show()
 
 def scatterGenres(n,genre):
@@ -253,8 +253,8 @@ def scatterGenres(n,genre):
 		plt.annotate(name,xy=(x, y),xytext=(-20, 20),textcoords='offset points',ha='right',va='bottom',arrowprops=dict(arrowstyle = '->',connectionstyle='arc3,rad=0'))
 	plt.title('2-D Visualization of 10 Random ' + genre.title() + ' Movies')
 	axes = plt.gca()
-	axes.set_xlim([-1,1])
-	axes.set_ylim([-1,1])
+	axes.set_xlim([-2,2])
+	axes.set_ylim([-2,2])
 	plt.show()
 
 

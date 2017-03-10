@@ -14,4 +14,6 @@ projection = np.dot(plot, V)
 # Transpose projection to write to file in columns
 projection = np.transpose(projection)
 
+projection = projection - projection.mean(axis=0)
+projection = projection / projection.std(axis=0)
 np.savetxt("coords.csv", projection, delimiter=",")
