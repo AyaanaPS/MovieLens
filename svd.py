@@ -5,17 +5,21 @@ import matplotlib.pyplot as plt
 V = np.genfromtxt('V.csv',delimiter=",")
 
 A,S,B = np.linalg.svd(V, full_matrices = False)
+print(len(B))
 B = np.transpose(B)
 plot = B[:,:2]
-#plot = np.dot(plot,np.transpose(V))
+plot = np.dot(plot,np.transpose(V))
 plot = plot / plot.max(axis=0)
 print plot
 
 movies = {}
 for i,(x,y) in enumerate(plot):
-	movies[i] = (x,y)
+	movies[i+1] = (x,y)
+	# print(x,y)
 
-labels = []
+
+
+# labels = []
 #for i in range(10):
 
 

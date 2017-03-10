@@ -118,7 +118,7 @@ def visualizeHighestRated(n):
 		movieNames.append(movies[(index-1),1])
 
 	title = 'The Ratings of the Highest Rated Movies'
-	filename = 'highestRatings.png'
+	filename = 'highestRated.png'
 	buildBoxPlot(data_to_plot, movieNames, title, filename)
 
 def visualizeGenre(genre):
@@ -141,7 +141,9 @@ def visualizeGenre(genre):
 # visualizeAllRatings()
 # visualizeMostPopular(10)
 # visualizeHighestRated(10)
-visualizeGenre('childrens')
+# visualizeGenre('childrens')
 # visualizeGenre('musical')
+# visualizeGenre('horror')
+# visualizeGenre('romance')
 
 
