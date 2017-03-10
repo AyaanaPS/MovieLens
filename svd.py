@@ -5,15 +5,13 @@ import matplotlib.pyplot as plt
 V = np.genfromtxt('V.csv',delimiter=",")
 
 A,S,B = np.linalg.svd(V, full_matrices = False)
-print(len(B))
-B = np.transpose(B)
-plot = B[:,:2]
-plot = plot / plot.max(axis=0)
-print plot
 
-movies = {}
-for i,(x,y) in enumerate(plot):
-	movies[i+1] = (x,y)
-	# print(x,y)
+# Transpose first 2 columns of A
+plot = np.transpose(A[:,:2])
+# Dot product with V to get the projection
+projection = np.dot(plot, V)
 
-np.savetxt("coords.csv", plot, delimiter=",")
+# Transpose projection to write to file in columns
+projection = np.transpose(projection)
+
+np.savetxt("coords.csv", projection, delimiter=",")
